@@ -2047,3 +2047,29 @@ end)
 closeButton.MouseButton1Click:Connect(function() -- Функция закрытия
     frame.Visible = false -- Скрытие фрейма
 end)
+
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "OnlineUsersGui"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Name = "OnlineUsersLabel"
+textLabel.Size = UDim2.new(0, 200, 0, 50) -- Размер метки
+textLabel.Position = UDim2.new(1, -210, 0, 10) -- Позиция в правом нижнем углу
+textLabel.Text = "Online Users: 0" -- Начальное значение
+textLabel.BackgroundTransparency = 0.5 -- Прозрачность фона
+textLabel.TextColor3 = Color3.new(1, 1, 1) -- Цвет текста
+textLabel.BackgroundColor3 = Color3.new(0, 0, 0) -- Цвет фона
+textLabel.TextScaled = true -- Масштабирование текста
+textLabel.Parent = screenGui
+
+local function updateOnlineUsers(count)
+    textLabel.Text = "Online Users with script: " .. tostring(count)
+end
+
+while true do
+    wait(5)
+    local onlineCount = #game.Players:GetPlayers()
+    updateOnlineUsers(onlineCount)
+end
